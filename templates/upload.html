@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>第二屆DIVA台灣社線上大賽 冬季大會 - 上傳界面</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="/static/scripts/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/static/scripts/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/static/scripts/jquery-2.1.4.min.js"></script>
+	<script src="/static/scripts/bootstrap.min.js"></script>
+	<script src="/static/scripts/jquery.rwdImageMaps.min.js"></script>
+<script>
+$(document).ready(function(e) {
+$('img[usemap]').rwdImageMaps();
+
+});
+</script>
+
+<style>
+body { font-family: "Noto Sans CJK TC","思源黑體 TWHK Regular","思源黑體",思源,Source,"Noto Sans CJK","Noto Sans CJK Regular","微軟正黑體",Verdana; }
+</style>
+</head>
+<body>
+<div class="frame">
+	<!--尋覽列-->
+	<div class="navbar-wrapper"><nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<!--Logo-->
+			<div class="navbar-header">
+				<!--小螢幕變為按鈕模式-->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+				<span class="navbar-brand" >第二屆DIVA台灣社線上大賽 冬季大會</span>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/">首頁</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">分組成績<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li class="divider"><li><a href="">第一組</a></li>
+						<li class="divider"><li><a href="">第二組</a></li>
+						<li class="divider"><li><a href="">第三組</a></li>
+						<li class="divider"><li><a href="">第四組</a></li>
+						<li class="divider">
+					</ul>
+				</li>
+				<li><a href="">歌曲成績</a></li>
+				<li class="active"><a href="./upload">上傳</a></li>
+			</ul>
+			</div>
+		</div>				
+	</nav></div>
+	<!--===================================================================-->
+	<!--內文-->
+	<div class="container">
+		<h2>成績上傳界面</h2>
+		<div class="panel panel-default container">
+			<h3>參賽者：{{ fbid|safe }}</h3><br />
+
+			<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">歌曲</label>
+					<div class="col-sm-10">
+						<select class="form-control" name="song">
+							<option value="1">Tell Your World</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input type="file" name="image">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">達成率</label>
+					<div class="col-sm-10">
+						<input type="percent" class="form-control" name="Rate" value="100.00">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="remeber"> 記住上傳的歌曲
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">送出</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>
