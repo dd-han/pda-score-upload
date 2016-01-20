@@ -10,17 +10,4 @@
 
 * Python3
 * Flask
-* Flask-Social
-* Facebook API
-
-## 安裝步驟
-
-    pacman -S python3
-    wget https://bootstrap.pypa.io/get-pip.py
-    python3 get-pip.py
-    python3 -m pip install Flask
-    python3 -m pip install Flask-Social
-    python3 -m pip install Flask-SQLAlchemy
-    python3 -m pip install https://github.com/sbook/flask-mongoengine/tarball/master
-    python3 -m pip install http://github.com/pythonforfacebook/facebook-sdk/tarball/master
 
