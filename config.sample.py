@@ -8,3 +8,9 @@ SERVER_WITH_HTTPS=False
 FB_APP_ID=''
 FB_APP_SEC=''
 
+DB_HOST='localhost'
+DB_USER='db-user-name'
+DB_PASSWORD='db-user-password'
+DB_DATABASE='db-database-name'
+DB_CHARSET='utf8'
+

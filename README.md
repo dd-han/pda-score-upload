@@ -10,4 +10,6 @@
 
 * Python3
 * Flask
+* PyMySQL
+
 
