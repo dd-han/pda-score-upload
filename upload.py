@@ -16,7 +16,6 @@ UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = set(['jpg','png','jpeg'])
 
 Uploader = Blueprint('Uploader',__name__)
-Uploader.secret_key = 'fdsjf329'
 
 def allowed_file(filename):
     return '.' in filename and \
