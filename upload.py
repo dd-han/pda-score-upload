@@ -132,8 +132,15 @@ def upload():
             if request.cookies.get('fbToken'):
                 fbToken=request.cookies.get('fbToken')
                 CardName=request.cookies.get('CardName')
+                
+                songOpt=''
+                for songinfo in getSong():
+                    songOpt+='<option value=\"'+str(songinfo['SongID'])+'\">'+songinfo['SongName']+' - '+songinfo['SongLevel']+'</option>'
+                return render_template('upload.html',CardName=CardName,Songs=songOpt)
             else:
                 LoginURL=facebook.genGetCodeURL(request.base_url)
                 CardName='您尚未登入，<a href=\"'+LoginURL+'\">使用facebook登入</a>'
+                return CardName
 
-            return render_template('upload.html',CardName=CardName)
+
+
