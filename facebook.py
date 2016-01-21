@@ -17,7 +17,7 @@ def getToken(RedirectURL,code):
     conn = http.client.HTTPSConnection("graph.facebook.com")
     request='/oauth/access_token'+\
     '?client_id='+FB_APP_ID+\
-    '&client_secret=c849cabef504a8ed89ac24f3f4005f9d'+\
+    '&client_secret='+FB_APP_SEC+\
     '&redirect_uri='+parse.quote_plus(RedirectURL)+\
     '&code='+code
     conn.request("GET", request)
