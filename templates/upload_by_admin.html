@@ -7,11 +7,19 @@
 {% block content %}
 <h2>成績上傳界面</h2>
 <div class="panel panel-default" style="padding:0px 15px">
-	<h3>參賽者：{{ CardName|safe }}</h3><br />
+	<h3>管理員：{{ AdminName }}</h3><br />
 
 	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">歌曲</label>
+			<label class="col-sm-2 control-label">玩家</label>
+			<div class="col-sm-10">
+				<select class="form-control" name="PlayerID">
+					{% for player in players %}<option value="{{player['PlayerID']}}">{{player['CardName']}}</option>{% endfor %}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">歌曲</label>
 			<div class="col-sm-10">
 				<select class="form-control" name="song">
 					{% for song in songs %}<option value="{{song['SongID']}}">{{song['SongName']}} - {{song['SongLevel']}}</option>{% endfor %}

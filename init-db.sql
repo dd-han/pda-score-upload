@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生時間： 2016 年 01 月 22 日 04:09
--- 伺服器版本: 10.0.23-MariaDB-1~jessie-log
--- PHP 版本： 5.6.14-0+deb8u1
+-- 產生時間： 2016 年 01 月 22 日 21:25
+-- 伺服器版本: 10.1.10-MariaDB-log
+-- PHP 版本： 7.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,17 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `pda-score`
 --
-CREATE DATABASE IF NOT EXISTS `pda-score` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `pda-score`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `Admins`
+--
+
+CREATE TABLE `Admins` (
+  `FBID` varchar(20) NOT NULL,
+  `AdminName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -47,6 +56,7 @@ CREATE TABLE `Score` (
   `PlayerID` int(11) NOT NULL,
   `SongID` int(11) NOT NULL,
   `ImageHash` char(40) NOT NULL,
+  `ImageExt` varchar(10) NOT NULL,
   `Rate` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,7 +69,8 @@ CREATE TABLE `Score` (
 CREATE TABLE `Songs` (
   `SongID` int(11) NOT NULL,
   `SongName` varchar(50) NOT NULL,
-  `SongLevel` varchar(10) NOT NULL
+  `SongLevel` varchar(10) NOT NULL,
+  `isSpecSong` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -67,10 +78,17 @@ CREATE TABLE `Songs` (
 --
 
 --
+-- 資料表索引 `Admins`
+--
+ALTER TABLE `Admins`
+  ADD PRIMARY KEY (`FBID`);
+
+--
 -- 資料表索引 `Player`
 --
 ALTER TABLE `Player`
   ADD PRIMARY KEY (`PlayerID`),
+  ADD UNIQUE KEY `FBID` (`FBID`),
   ADD KEY `TeamID` (`TeamID`);
 
 --
@@ -95,12 +113,12 @@ ALTER TABLE `Songs`
 -- 使用資料表 AUTO_INCREMENT `Player`
 --
 ALTER TABLE `Player`
-  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- 使用資料表 AUTO_INCREMENT `Score`
 --
 ALTER TABLE `Score`
-  MODIFY `ScoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ScoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- 使用資料表 AUTO_INCREMENT `Songs`
 --

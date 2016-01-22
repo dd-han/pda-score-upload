@@ -10,7 +10,7 @@ from flask import Blueprint,render_template,request,redirect,make_response
 import facebook
 from config import SERVER_WITH_HTTPS , TEAMS
 
-from database import lookupPlayer, getSong, insScore
+from database import lookupAdmin, getSong, insScore, getPlayer
 
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = set(['jpg','png','jpeg'])
@@ -29,14 +29,20 @@ def upload():
     ## POST
     if request.method == 'POST':
         file = request.files['image']
-        if not request.form.get('song'):
+        if not facebook.getUID(request.cookies.get('fbToken')):
+            return "session已過期"
+
+        elif not lookupAdmin(facebook.getUID(request.cookies.get('fbToken'))):
+            return "您不是管理員，滾！！"
+
+        elif not request.form.get('song'):
             return "您沒有選擇歌曲！！"
 
         elif not request.form.get('Rate'):
             return "您沒有輸入達成率！！"
 
-        elif not request.cookies.get('fbToken'):
-            return "您尚未登入，無法上傳成績！！"
+        elif not request.form.get('PlayerID'):
+            return "您沒有選擇玩家！！"
 
         elif not file:
             return "你沒有選擇檔案！！"
@@ -49,15 +55,13 @@ def upload():
                 ## 整理資訊
                 song    = request.form.get('song')
                 rate    = request.form.get('Rate')
-                fbToken = request.cookies.get('fbToken')
-                fbUID   = facebook.getUID(fbToken)
-                PlayerID= lookupPlayer(fbUID)['PlayerID']
+                PlayerID= request.form.get('PlayerID')
                 fileExt = '.'+getExt(file.filename)
                 ## 未來再實做的功能
                 #remeber = request.form.get('remeber',False)
 
             except:
-                return "您的Session已經過期，請重新登入"
+               return render_template('upload_msg.html',message="欄位輸入不完整")
 
             try:
                 ## 產生暫存的檔名
@@ -92,7 +96,7 @@ def upload():
                 os.remove(temp_fullpath)
 
             except:
-                return "存檔有問題，可能硬碟滿了，請通知管理員。"
+                return render_template('upload_msg.html',message="存檔有問題，可能硬碟滿了，請通知管理員。")
 
                # return "upload Sucesfull file tempory as " + temp_filename +\
                #     " md5 is " + hasher.hexdigest() + " and Player is " + player
@@ -101,9 +105,9 @@ def upload():
                 insScore(PlayerID,song,sha1,fileExt,rate)
 
             except:
-                return "資料庫有點毛病"
+                return render_template('upload_msg.html',message="資料庫有點毛病")
 
-            return "存檔成功"
+            return render_template('upload_msg.html',message="存檔成功")
 
     ## GET METHOD
     else:
@@ -111,34 +115,36 @@ def upload():
         if code:
             Res=facebook.getToken(request.base_url,code)
             if Res[0]:
-                PlayerUID=facebook.getUID(Res[1])
-                PlayerInfo=lookupPlayer(PlayerUID)
-                if PlayerInfo:
+                AdminUID=facebook.getUID(Res[1])
+                AdminInfo=lookupAdmin(AdminUID)
+                if AdminInfo:
                     resp = make_response(redirect(request.base_url))
                     #resp = make_response("寫入Cookie中......"+PlayerUID+PlayerInfo['CardName'])
                     resp.set_cookie(key='fbToken',value=Res[1],max_age=int(Res[2]),\
                             secure=SERVER_WITH_HTTPS)
-                    resp.set_cookie(key='CardName',value=PlayerInfo['CardName'],max_age=int(Res[2]),\
+                    resp.set_cookie(key='AdminName',value=AdminInfo['AdminName'],max_age=int(Res[2]),\
                             secure=SERVER_WITH_HTTPS)
                     return resp
 
                 else:
-                    return "您似乎不是參賽者，如果有什麼誤會請回報你的FacenookID："+PlayerUID
+                    return render_template('upload_msg.html',message="您似乎不是管理員，如果有什麼誤會請回報你的FacenookID："+AdminUID)
                 
             else:
-                return "登入失敗，請重試，錯誤訊息："+Res[1]
+                return render_template('upload_msg.html',message="登入失敗，請重試，錯誤訊息："+Res[1])
             
         else:
             if request.cookies.get('fbToken'):
                 fbToken=request.cookies.get('fbToken')
-                CardName=request.cookies.get('CardName')
+                AdminName=request.cookies.get('AdminName')
                 
-                songinfo = getSong()
-                return render_template('upload.html',TEAMS=TEAMS,CardName=CardName,songs=songinfo)
+                if lookupAdmin(facebook.getUID(fbToken)):
+                    songinfo = getSong()
+                    playerinfo = getPlayer()
+                    return render_template('upload_by_admin.html',TEAMS=TEAMS,AdminName=AdminName,songs=songinfo,players=playerinfo)
+                else:
+                    return render_template('upload_msg.html',message='滾！！')
             else:
                 LoginURL=facebook.genGetCodeURL(request.base_url)
-                CardName='您尚未登入，<a href=\"'+LoginURL+'\">使用facebook登入</a>'
-                return CardName
-
-
+                msg='您尚未登入，<a href=\"'+LoginURL+'\">使用facebook登入</a>'
+                return render_template('upload_msg.html',message=msg)
 

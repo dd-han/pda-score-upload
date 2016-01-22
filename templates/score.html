@@ -1,0 +1,25 @@
+{% extends "base.html" %}  
+
+{% block title %}第二屆DIVA台灣社線上大賽 - 分數查詢{% endblock %}
+
+{% block content %}
+<h2>{% block contentTITLE %}{% endblock %}</h2>
+
+	<!--{{scoreList}}-->
+	{% for song in songList %}
+	<div class="col-sm-8" style="padding: 0"><h3>歌曲：<a href="/score/team-score/{{song['SongID']}}">{{song['SongName']}}</a></h3></div>
+	<div class="col-sm-4" style="padding: 0"><h3>難度：{{song['SongLevel']}}</h3></div>
+	<div style="clear: both"></div>
+	{% for score in scoreList[ song['SongID']-1 ]%}
+	<div class="col-sm-4 thumbnail">
+		<div class="col-sm-6" style="padding:0"><a href="https://www.facebook.com/{{score['FBID']}}" target="_blank">{{score['CardName']}}
+			</a></div>
+		<div class="col-sm-6">達成率：{{ score['Rate'] }}%</div>
+		<img src="/static/images/{{score['ImageHash']}}{{score['ImageExt']}}" style="max-width: 100%;">
+	</div>
+	{% endfor %}
+	<div style="clear: both"></div>
+	{% endfor %}
+	
+{% endblock%}
+

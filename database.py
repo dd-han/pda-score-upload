@@ -37,6 +37,49 @@ def getSong():
         connection.close()
         return result
 
+def getOwnSong():
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT * FROM `Songs` WHERE `isSpecSong` = False'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
+def getSpecSong():
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT * FROM `Songs` WHERE `isSpecSong` = True'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
+def getTeamSongTop(TeamID,SongID,Limit):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            ## This line not Working!!!!
+            ##GROUP BY `Score`.`PlayerID`\
+            sql = 'SELECT `Player`.`CardName`, `Player`.`FBID`, `Score`.`Rate`, `Score`.`ImageHash`, `Score`.`ImageExt`\
+            FROM `Score` INNER JOIN `Player` ON `Score`.`PlayerID`=`Player`.`PlayerID`\
+            WHERE `Player`.`TeamID` = %s AND `Score`.`SongID` = %s\
+            ORDER BY `Score`.`Rate` DESC LIMIT %s'
+            cursor.execute(sql, (TeamID,SongID,Limit) )
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
+
+## 這個根本用不到
 def getScore(Player,Song,Start,Amount):
     result=False
     try:
@@ -63,14 +106,26 @@ def lookupPlayer(FBID):
         connection.close()
         return result
 
-def insScore(Player,Song,HASH,Rate):
+def lookupAdmin(FBID):
     result=False
     try:
         connection=makeConn()
         with connection.cursor() as cursor:
-            sql = 'INSERT INTO `Score` (`PlayerID`, `SongID`, `ImageHash`, `Rate`) \
-            VALUES ( %s, %s, %s, %s)'
-            cursor.execute(sql, (Player,Song,HASH,Rate) )
+            sql = 'SELECT * FROM `Admins` WHERE `FBID` = %s'
+            cursor.execute(sql,FBID)
+            result = cursor.fetchone()
+    finally:
+        connection.close()
+        return result
+
+def insScore(Player,Song,HASH,EXT,Rate):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'INSERT INTO `Score` (`PlayerID`, `SongID`, `ImageHash`, `ImageExt`, `Rate`) \
+            VALUES ( %s, %s, %s, %s, %s)'
+            cursor.execute(sql, (Player,Song,HASH,EXT,Rate) )
             connection.commit()
             result=True
     finally:
