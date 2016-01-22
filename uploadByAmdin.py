@@ -142,7 +142,12 @@ def upload():
                     playerinfo = getPlayer()
                     return render_template('upload_by_admin.html',TEAMS=TEAMS,AdminName=AdminName,songs=songinfo,players=playerinfo)
                 else:
-                    return render_template('upload_msg.html',message='滾！！')
+                    if not facebook.getUID(fbToken):
+                        return render_template('upload_msg.html',\
+                                message='Token過期，請重新登入：'+"<a href=\""+facebook.genGetCodeURL(request.base_url)+"\">使用facebook登入</a>")
+                    else:
+                        return render_template('upload_msg.html',message='你以為產生Token送給我，我就會吃嘛！！')
+
             else:
                 LoginURL=facebook.genGetCodeURL(request.base_url)
                 msg='您尚未登入，<a href=\"'+LoginURL+'\">使用facebook登入</a>'
