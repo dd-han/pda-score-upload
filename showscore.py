@@ -22,11 +22,15 @@ def showOwnScore(team):
     scoreList=[]
     for song in songList:
         scoreList.append(getTeamSongTop(team,song['SongID'],3))
-    return render_template('score_team.html',TEAMS=TEAMS,teamname=TEAMS[int(team)-1][1],songList=songList,scoreList=scoreList)
+    return render_template('score_team.html',TEAMS=TEAMS,teamname=TEAMS[int(team)-1][1],songList=songList,scoreList=scoreList,teamID=team)
+
+@Score.route('/team-score/<teamID>/song/<songid>')
+def showTeamSongScore(teamID,songid):
+    return "這裡會放「該組這首歌的所有成績紀錄」，避免超過三個被折疊"
 
 @Score.route('/personal/')
 def showRank():
-    return render_template('score_personal.html')
+    return render_template('score_personal.html',TEAMS=TEAMS)
 
 @Score.route('/personal/<playerid>')
 def showPlayerScore(team):

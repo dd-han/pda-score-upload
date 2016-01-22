@@ -61,7 +61,7 @@ def upload():
                 #remeber = request.form.get('remeber',False)
 
             except:
-               return render_template('upload_msg.html',message="欄位輸入不完整")
+               return render_template('upload_msg.html',TEAMS=config.TEAMS,message="欄位輸入不完整")
 
             try:
                 ## 產生暫存的檔名
