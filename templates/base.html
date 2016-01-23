@@ -20,7 +20,6 @@ body { font-family: "Noto Sans CJK TC","思源黑體 TWHK Regular","思源黑體
 <div class="frame">
 	<div class="navbar-wrapper"><nav class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
-			<!--Logo-->
 			<div class="navbar-header">
 				<!--小螢幕變為按鈕模式-->
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -31,9 +30,18 @@ body { font-family: "Noto Sans CJK TC","思源黑體 TWHK Regular","思源黑體
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="{% block menuIndexClass %}{% endblock%}"><a href="/">首頁</a></li>
+
+				<li class="dropdown {% block menuIndexClass %}{% endblock%}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >首頁<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li class="divider"><li><a href="/#intro">賽制說明</a></li>
+						<li class="divider"><li><a href="/#group">分組名單</a></li>
+						<li class="divider"><li><a href="/#song">歌曲清單</a></li>
+						<li class="divider">
+					</ul>
+				</li>
 				<li class="dropdown {% block menuSongClass %}{% endblock%}">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">分組成績<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >分組成績<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						{% for i in TEAMS %}
 						<li class="divider"><li><a href="/score/team/{{i[0]}}">{{i[1]}}</a></li>

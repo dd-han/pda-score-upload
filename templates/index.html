@@ -5,9 +5,13 @@
 {% block menuIndexClass %}active{% endblock%}
 
 {% block content %}
-<h1><a name="intro"></a>賽制說明</h1>
+<a name="intro"></a>
+<h1>賽制說明</h1>
+<p>待補完</p>
 
-<h2><a name="group"></a>分組名單</h2>
+<div style="clear: both;"></div>
+<a name="group"></a>
+<h2>分組名單</h2>
 {% for team in TEAMSMEMBER %}
 <div class="col-sm-4 thumbnail" >
 <h3 style="padding-left: 8px"><a href="/score/team/{{team[0][0]}}">{{team[0][1]}}</a></h3>
@@ -25,7 +29,9 @@
 </div>
 {% endfor %}
 
-<h2><a name="song"></a>歌曲清單</a></h2>
+<div style="clear: both;"></div>
+<a name="song"></a>
+<h2>歌曲清單</h2>
 <table class="table table-hover">
 	<thead>
 		<tr><th>歌曲名稱</th><th>難度</th><th>★</th><th></th></tr>
