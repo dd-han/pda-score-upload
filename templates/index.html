@@ -25,16 +25,17 @@
 </div>
 {% endfor %}
 
-
 <h2><a name="song"></a>歌曲清單</a></h2>
 <table class="table table-hover">
 	<thead>
-		<tr><th>歌曲名稱</th><th>難度</th></tr>
+		<tr><th>歌曲名稱</th><th>難度</th><th>★</th><th></th></tr>
 	</thead>
 	<tbody>
 		{% for song in songs %}<tr>
 			<td>{{song['SongName']}}</td>
 			<td>{{song['SongLevel']}}</td>
+			<td>{{song['SongStars']}}</td>
+			{% if song['isSpecSong'] %}<td>指定曲</td>{% else %}<td></td>{% endif %}
 		</tr>{% endfor %}
 	</tbody>
 </table>

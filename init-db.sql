@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生時間： 2016 年 01 月 23 日 08:46
+-- 產生時間： 2016 年 01 月 23 日 10:42
 -- 伺服器版本: 10.1.10-MariaDB-log
 -- PHP 版本： 7.0.2
 
@@ -72,6 +72,7 @@ CREATE TABLE `Songs` (
   `SongID` int(11) NOT NULL,
   `SongName` varchar(50) NOT NULL,
   `SongLevel` varchar(10) NOT NULL,
+  `SongStars` float NOT NULL,
   `isSpecSong` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -115,7 +116,7 @@ ALTER TABLE `Songs`
 -- 使用資料表 AUTO_INCREMENT `Player`
 --
 ALTER TABLE `Player`
-  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- 使用資料表 AUTO_INCREMENT `Score`
 --
@@ -125,7 +126,7 @@ ALTER TABLE `Score`
 -- 使用資料表 AUTO_INCREMENT `Songs`
 --
 ALTER TABLE `Songs`
-  MODIFY `SongID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `SongID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- 已匯出資料表的限制(Constraint)
 --
