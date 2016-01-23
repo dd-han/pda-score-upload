@@ -10,24 +10,34 @@
 <h2><a name="group"></a>分組名單</h2>
 {% for team in TEAMSMEMBER %}
 <div class="col-sm-4 thumbnail" >
-<h3><a href="/score/team/{{team[0][0]}}">{{team[0][1]}}</a></h3>
+<h3 style="padding-left: 8px"><a href="/score/team/{{team[0][0]}}">{{team[0][1]}}</a></h3>
 <table class="table table-hover">
 	<thead>
-		<tr>
-			<th>Facebook名稱</th>
-			<th>Aime卡名稱</th>
-		</tr>
+		<tr><th>Facebook名稱</th><th>Aime卡名稱</th></tr>
 	</thead>
 	<tbody>
-		{% for member in team[1] %}
-		<tr>
+		{% for member in team[1] %}<tr>
 			<td><a href="https://www.facebook.com/{{member['FBID']}}" target="_blank">{{member['FBName']}}</a></td>
 			<td><a href="/score/personal/{{member['PlayerID']}}">{{member['CardName']}}</a></td>
-		</tr>
-		{% endfor %}
+		</tr>{% endfor %}
 	</tbody>
 </table>
 </div>
 {% endfor %}
+
+
+<h2><a name="song"></a>歌曲清單</a></h2>
+<table class="table table-hover">
+	<thead>
+		<tr><th>歌曲名稱</th><th>難度</th></tr>
+	</thead>
+	<tbody>
+		{% for song in songs %}<tr>
+			<td>{{song['SongName']}}</td>
+			<td>{{song['SongLevel']}}</td>
+		</tr>{% endfor %}
+	</tbody>
+</table>
+
 
 {% endblock %}

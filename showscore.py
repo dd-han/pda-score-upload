@@ -33,11 +33,7 @@ def showRank():
     return render_template('score_personal.html',TEAMS=TEAMS)
 
 @Score.route('/personal/<playerid>')
-def showPlayerScore(team):
-    songList=getSong()
-    scoreList=[]
-    for song in songList:
-        scoreList.append(getTeamSongTop(team,song['SongID'],3))
-    return render_template('score_team.html',TEAMS=TEAMS,teamname=TEAMS[int(team)-1][1],songList=songList,scoreList=scoreList)
+def showPlayerScore(playerid):
+    return render_template('score_personal.html',TEAMS=TEAMS)
 
 
