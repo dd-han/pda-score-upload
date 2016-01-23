@@ -14,7 +14,9 @@
 			<label class="col-sm-2 control-label">玩家</label>
 			<div class="col-sm-10">
 				<select class="form-control" name="PlayerID">
-					{% for player in players %}<option value="{{player['PlayerID']}}">{{player['CardName']}}</option>{% endfor %}
+					{% for player in players %}<option value="{{player['PlayerID']}}">
+					第{{player['TeamID']}}組 - {{player['FBName']}} ({{player['CardName']}})
+					</option>{% endfor %}
 				</select>
 			</div>
 		</div>

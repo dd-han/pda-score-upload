@@ -10,7 +10,7 @@ from flask import Blueprint,render_template,request,redirect,make_response
 import facebook
 from config import SERVER_WITH_HTTPS , TEAMS
 
-from database import lookupAdmin, getSong, insScore, getPlayer
+from database import lookupAdmin, getSong, insScoreAdmin, getPlayer
 
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = set(['jpg','png','jpeg'])
@@ -102,7 +102,7 @@ def upload():
                #     " md5 is " + hasher.hexdigest() + " and Player is " + player
 
             try:
-                insScore(PlayerID,song,sha1,fileExt,rate)
+                insScoreAdmin(PlayerID,song,sha1,fileExt,rate,facebook.getUID(request.cookies.get('fbToken')))
 
             except:
                 return render_template('upload_msg.html',message="資料庫有點毛病")

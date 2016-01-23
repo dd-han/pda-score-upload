@@ -132,6 +132,20 @@ def insScore(Player,Song,HASH,EXT,Rate):
         connection.close()
         return result
         
+def insScoreAdmin(Player,Song,HASH,EXT,Rate,Uploader):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'INSERT INTO `Score` (`PlayerID`, `SongID`, `ImageHash`, `ImageExt`, `Rate`, `ScoreUploaderID`) \
+            VALUES ( %s, %s, %s, %s, %s, %s)'
+            cursor.execute(sql, (Player,Song,HASH,EXT,Rate,Uploader) )
+            connection.commit()
+            result=True
+    finally:
+        connection.close()
+        return result
+        
     #with connection.cursor() as cursor:
     #    # Create a new record
     #    sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"

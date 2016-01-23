@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生時間： 2016 年 01 月 22 日 21:25
+-- 產生時間： 2016 年 01 月 23 日 08:46
 -- 伺服器版本: 10.1.10-MariaDB-log
 -- PHP 版本： 7.0.2
 
@@ -41,7 +41,8 @@ CREATE TABLE `Player` (
   `PlayerID` int(4) NOT NULL,
   `TeamID` int(11) NOT NULL,
   `FBID` varchar(20) NOT NULL,
-  `CardName` varchar(50) NOT NULL
+  `CardName` varchar(50) NOT NULL,
+  `FBName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -53,6 +54,7 @@ CREATE TABLE `Player` (
 CREATE TABLE `Score` (
   `ScoreID` int(11) NOT NULL,
   `ScoreDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ScoreUploaderID` varchar(20) NOT NULL,
   `PlayerID` int(11) NOT NULL,
   `SongID` int(11) NOT NULL,
   `ImageHash` char(40) NOT NULL,
@@ -113,12 +115,12 @@ ALTER TABLE `Songs`
 -- 使用資料表 AUTO_INCREMENT `Player`
 --
 ALTER TABLE `Player`
-  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `PlayerID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- 使用資料表 AUTO_INCREMENT `Score`
 --
 ALTER TABLE `Score`
-  MODIFY `ScoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ScoreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用資料表 AUTO_INCREMENT `Songs`
 --
