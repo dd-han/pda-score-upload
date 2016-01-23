@@ -25,6 +25,18 @@ def getPlayer():
         connection.close()
         return result
 
+def getMember(team):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT * FROM `Player` WHERE TeamID = %s'
+            cursor.execute(sql, team)
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
 def getSong():
     result=False
     try:

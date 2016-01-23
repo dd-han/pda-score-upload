@@ -5,8 +5,29 @@
 {% block menuIndexClass %}active{% endblock%}
 
 {% block content %}
-<h2>首頁</h2>
+<h1><a name="intro"></a>賽制說明</h1>
 
-<p>有請主辦提供一下意見首頁該放什麼</p>
+<h2><a name="group"></a>分組名單</h2>
+{% for team in TEAMSMEMBER %}
+<div class="col-sm-4 thumbnail" >
+<h3><a href="/score/team/{{team[0][0]}}">{{team[0][1]}}</a></h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Facebook名稱</th>
+			<th>Aime卡名稱</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for member in team[1] %}
+		<tr>
+			<td><a href="https://www.facebook.com/{{member['FBID']}}" target="_blank">{{member['FBName']}}</a></td>
+			<td><a href="/score/personal/{{member['PlayerID']}}">{{member['CardName']}}</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+</div>
+{% endfor %}
 
 {% endblock %}
