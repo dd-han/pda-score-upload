@@ -5,9 +5,14 @@
 {% block menuIndexClass %}active{% endblock%}
 
 {% block content %}
-<a name="intro"></a>
-<h1>賽制說明</h1>
-<p>待補完</p>
+
+<a href="https://www.facebook.com/groups/216199652045366/"><img src="https://pdatw-score.dd-han.tw/static/banner.jpg" class="img-responsive img-rounded" alt="Banner"></a>
+<div class="container">
+<p></p>
+<p>此網站為「第二屆DIVA台灣社線上大賽」紀錄頁面。<br />
+本次賽制將藉由不同賽制來增加音樂遊戲不同玩法的可能性。<br />
+本場比賽主體以「分組對戰」為主，看重團體的戰術概念、以達到交流的目標。</p>
+</div>
 
 <div style="clear: both;"></div>
 <a name="group"></a>
@@ -30,6 +35,32 @@
 {% endfor %}
 
 <div style="clear: both;"></div>
+
+<div class="col-sm-6" style="padding: 0;">
+<a name="intro"></a>
+<h1>賽制積分規則說明</h1>
+<h2>I.排序規則</h2>
+<p>由各隊成績回報的成績圖為依據，以隊伍為單位：
+<ul><li>採計官方指定曲最高達成率一張</li>
+<li>採計大會賽指定曲最高達成率，一人三張</li>
+<li>不同隊員上傳重複之曲目，則以最高達成率者優先</li>
+<li>隊員成績不滿三張者，缺少的曲目將以０％計算</li></ul></p>
+
+<h2>II.積分轉換</h2>
+<p>以曲為基準，將各隊的成績予以排序：
+<ul><li>最高積分６點、最低1點</li>
+<li>排序標準以「達成率」＞「ＦＩＮＥ數量」＞「樂曲分數」為判斷方式</li>
+<ul><li>組合鍵ＦＩＮＥ不列入計算，依成績單上的數字為主</li></ul>
+<li>完全符合的兩張成績圖的積分會給予一致的積分</li>
+<ul><li>同為最高且成績完全符合的情況，該曲積分為６、６、４、３、２、１</li></ul>
+<li>同上，０％的排序，將一律給予最低的積分１點</li>
+<li>官方指定曲的積分為兩倍，積分為２、４、６、…、１２點</li></ul></p>
+
+<h2>III.積分計算</h2>
+<p>團隊積分：各隊員的積分加總則為團隊總積分（２３～１３８）<br />
+個人積分：各選手最後採計的成績三首總積分（３～１８）</p>
+</div>
+<div class="col-sm-6" style="padding: 0;">
 <a name="song"></a>
 <h2>歌曲清單</h2>
 <table class="table table-hover">
@@ -45,6 +76,6 @@
 		</tr>{% endfor %}
 	</tbody>
 </table>
-
+</div>
 
 {% endblock %}
