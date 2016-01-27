@@ -12,7 +12,6 @@ def makeConn():
             cursorclass=pymysql.cursors.DictCursor)
     return connection
 
-
 def getPlayer():
     result=False
     try:
@@ -25,6 +24,18 @@ def getPlayer():
         connection.close()
         return result
 
+def getOnePlayer(PlayerID):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT * FROM `Player` WHERE `PlayerID` = %s'
+            cursor.execute(sql,PlayerID)
+            result = cursor.fetchone()
+    finally:
+        connection.close()
+        return result
+
 def getMember(team):
     result=False
     try:
@@ -33,6 +44,18 @@ def getMember(team):
             sql = 'SELECT * FROM `Player` WHERE TeamID = %s'
             cursor.execute(sql, team)
             result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
+def getOneSong(songID):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT * FROM `Songs` WHERE  `Songs`.`SongID` = %s'
+            cursor.execute(sql,songID)
+            result = cursor.fetchone()
     finally:
         connection.close()
         return result
@@ -90,17 +113,16 @@ def getTeamSongTop(TeamID,SongID,Limit):
         connection.close()
         return result
 
-
-## 這個根本用不到
-def getScore(Player,Song,Start,Amount):
+def getScore(Player,Start,Amount):
     result=False
     try:
         connection=makeConn()
         with connection.cursor() as cursor:
-            sql = 'SELECT `ScoreDate`,`ImageHash`,`Rate` FROM `Score` \
-            WHERE `PlayerID` = %s AND `SongID` = %s \
+            sql = 'SELECT `ScoreDate`,`ImageHash`,`Score`.`ImageExt`,`Rate`,`SongName` ,`Songs`.`SongID`\
+            FROM `Score` INNER JOIN `Songs` on `Score`.`SongID`=`Songs`.`SongID`\
+            WHERE `PlayerID` = %s \
             ORDER BY `ScoreDate` DESC LIMIT %s OFFSET %s'
-            cursor.execute(sql, (Player,Song,Amount,Start) )
+            cursor.execute(sql, (Player,Amount,Start) )
             result = cursor.fetchall()
     finally:
         connection.close()

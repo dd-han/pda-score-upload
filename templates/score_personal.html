@@ -5,8 +5,16 @@
 {% block menuPersonalClass %}active{% endblock%}
 
 {% block content %}
-<h2>個人排名</h2>
+<h2>個人成績：<a href="https://www.facebook.com/{{playerInfo[0]['FBID']}}" target="_balnk">{{playerInfo[0]['CardName']}}</a></h2>
+<h3>所屬隊伍：{{playerInfo[1]}}</h3>
+{% for Score in Scores %}
 
-<p>功能撰寫中，稍後開放</p>
+<div class="col-sm-4 thumbnail">
+	<div class="col-sm-6" style="padding:0">{{Score['SongName']}}</div>
+	<div class="col-sm-6">達成率：{{Score['Rate']}}</div>
+	<img src="/static/images/{{Score['ImageHash']}}{{Score['ImageExt']}}" style="max-width: 100%;">
+</div>
+
+{% endfor %}
 
 {% endblock %}

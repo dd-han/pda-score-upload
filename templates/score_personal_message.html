@@ -1,0 +1,31 @@
+{% extends "base.html" %}  
+
+{% block title %}第二屆DIVA台灣社線上大賽{% endblock %}
+
+{% block menuPersonalClass %}active{% endblock%}
+
+{% block content %}
+
+<h2>個人成績</a></h2>
+
+{{ message | safe }}
+
+<table class="table table-hover">
+	<thead>
+		<tr><th></th><th>隊伍</th><th>卡名</th><th>Facebook</th>
+	</thead>
+	<tbody>
+	{% for player in Players %}
+	<tr>
+		<td style="text-align: center"><a href="./{{player['PlayerID']}}"><span class="glyphicon glyphicon-align-justify"></a></span></td>
+		<td><a href="/team/{{player['TeamID']}}">{{ player['TeamName'] }}</a></td>
+		<td><a href="./{{player['PlayerID']}}">{{ player['CardName'] }}</a></td>
+		<td><a href="./{{player['FBID']}}">{{ player['FBName'] }}</a></td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+
+
+{% endblock %}

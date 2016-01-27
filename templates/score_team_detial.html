@@ -8,11 +8,10 @@
 <h2>分組成績：{{teamInfo[1]}}</h2>
 
 	<!--{{scoreList}}-->
-	{% for song in songList %}
-	<div class="col-sm-8" style="padding: 0"><h3>歌曲：<a href="/score/team/{{teamInfo[0]}}/song/{{song['SongID']}}">{{song['SongName']}}</a></h3></div>
-	<div class="col-sm-4" style="padding: 0"><h3>難度：{{song['SongLevel']}}</h3></div>
+	<div class="col-sm-8" style="padding: 0"><h3>歌曲：<a href="/score/team/{{teamInfo[0]}}/songList/{{songList['SongID']}}">{{songList['SongName']}}</a></h3></div>
+	<div class="col-sm-4" style="padding: 0"><h3>難度：{{songList['SongLevel']}}</h3></div>
 	<div style="clear: both"></div>
-	{% for score in scoreList[ song['SongID']-1 ]%}
+	{% for score in scoreList[0]%}
 	<div class="col-sm-4 thumbnail">
 		<div class="col-sm-6" style="padding:0"><a href="https://www.facebook.com/{{score['FBID']}}" target="_blank">{{score['CardName']}}
 			</a></div>
@@ -21,7 +20,6 @@
 	</div>
 	{% endfor %}
 	<div style="clear: both"></div>
-	{% endfor %}
 	
 {% endblock%}
 
