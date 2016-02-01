@@ -20,7 +20,7 @@
 		<td style="text-align: center"><a href="./{{player['PlayerID']}}"><span class="glyphicon glyphicon-align-justify"></a></span></td>
 		<td><a href="/team/{{player['TeamID']}}">{{ player['TeamName'] }}</a></td>
 		<td><a href="./{{player['PlayerID']}}">{{ player['CardName'] }}</a></td>
-		<td><a href="./{{player['FBID']}}">{{ player['FBName'] }}</a></td>
+		<td><a href="https://www.facebook.com/{{player['FBID']}}">{{ player['FBName'] }}</a></td>
 	</tr>
 	{% endfor %}
 	</tbody>
