@@ -6,6 +6,21 @@
 
 {% block content %}
 
-<h2>歌曲排名將會再比賽結束後公佈！</h2>
+<h2>歌曲排名</h2>
+
+{% for song in songList%}
+<div class="col-sm-12 thumbnail">
+	<div class="col-sm-12 text-nowrap cutOverFlow"><h1>{{song['SongName']}}</h1></div>
+	<div class="col-sm-12">難度：{{song['SongLevel']}} ({{song['SongStars']}}★)</div>
+	{% for score in scoreList[song['SongID']-1] %}
+	<div class="col-sm-6">
+		<div class="col-sm-12"><h2>第{{score['Count']}}名</h2></div>
+		<div class="col-sm-6">{{score['CardName']}}</div>
+		<div class="col-sm-6">Rate: {{score['Rate']}}</div>
+		<img src="/static/images/{{score['ImageHash']}}{{score['ImageExt']}}" style="max-width: 100%;">
+	</div>
+	{% endfor %}
+</div>
+{% endfor %}
 
 {% endblock %}
