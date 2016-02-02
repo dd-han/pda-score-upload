@@ -14,7 +14,7 @@
 	<a name="{{song['SongID']}}"></a>
 	<div class="col-sm-12 text-nowrap cutOverFlow"><h1>{{song['SongName']}}</h1></div>
 	<div class="col-sm-12">難度：{{song['SongLevel']}} ({{song['SongStars']}}★)</div>
-	{% for score in scoreList[song['SongID']-1] %}
+	{% for score in scoreList[0] %}
 	<div class="col-sm-6">
 		<div class="col-sm-6"><a href="/score/personal/{{score['PlayerID']}}">{{score['CardName']}}</a></div>
 		<div class="col-sm-6">Rate: {{score['Rate']}}</div>
