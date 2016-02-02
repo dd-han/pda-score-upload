@@ -1,0 +1,4 @@
+.cutOverFlow {
+	 overflow:hidden;
+	 text-overflow:ellipsis
+}
