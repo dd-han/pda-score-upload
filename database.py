@@ -128,6 +128,22 @@ def getScore(Player,Start,Amount):
         connection.close()
         return result
 
+def getNonSpecScore(Player,Start,Amount):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            sql = 'SELECT `ScoreDate`,`ImageHash`,`Score`.`ImageExt`,`Rate`,`SongName` ,`Songs`.`SongID`\
+            FROM `Score` INNER JOIN `Songs` on `Score`.`SongID`=`Songs`.`SongID`\
+            WHERE `PlayerID` = %s AND  `isSpecSong` = False\
+            ORDER BY `ScoreDate` DESC LIMIT %s OFFSET %s'
+            cursor.execute(sql, (Player,Amount,Start) )
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
+
 def lookupPlayer(FBID):
     result=False
     try:

@@ -54,7 +54,8 @@ def showPlayerScore(playerid):
     playerInfo=[getOnePlayer(playerid)]
     playerInfo.append(TEAMS[playerInfo[0]['TeamID']-1][1])
 
-    Scores=getScore(playerid,0,10000)
+    #Scores=getScore(playerid,0,10000)
+    Scores=getNonSpecScore(playerid,0,10000)
     return render_template('score_personal.html',TEAMS=TEAMS,playerInfo=playerInfo,Scores=Scores)
 
 

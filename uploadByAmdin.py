@@ -105,9 +105,9 @@ def upload():
                 insScoreAdmin(PlayerID,song,sha1,fileExt,rate,facebook.getUID(request.cookies.get('fbToken')))
 
             except:
-                return render_template('upload_msg.html',message="資料庫有點毛病")
+                return render_template('upload_msg.html',message="資料庫有點毛病，請晚點再來試試看(圖片已經上傳成功)")
 
-            return render_template('upload_msg.html',message="存檔成功")
+            return render_template('upload_msg.html',message='存檔成功，<a href="/upload">返回上傳介面</a>')
 
     ## GET METHOD
     else:
@@ -146,7 +146,8 @@ def upload():
                         return render_template('upload_msg.html',\
                                 message='Token過期，請重新登入：'+"<a href=\""+facebook.genGetCodeURL(request.base_url)+"\">使用facebook登入</a>")
                     else:
-                        return render_template('upload_msg.html',message='你以為產生Token送給我，我就會吃嘛！！')
+                        return render_template('upload_msg.html',message='Token有效，但是您不是管理員！！\
+			您的FBID：'+facebook.getUID(fbToken))
 
             else:
                 LoginURL=facebook.genGetCodeURL(request.base_url)
