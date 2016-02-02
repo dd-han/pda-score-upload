@@ -7,7 +7,6 @@
 {% block content %}
 <h2>分組成績：{{teamInfo[1]}}</h2>
 
-	<!--{{scoreList}}-->
 	{% for song in songList %}
 	<div class="col-sm-8" style="padding: 0"><h3>歌曲：<a href="/score/team/{{teamInfo[0]}}/song/{{song['SongID']}}">{{song['SongName']}}</a></h3></div>
 	<div class="col-sm-4" style="padding: 0"><h3>難度：{{song['SongLevel']}}</h3></div>
