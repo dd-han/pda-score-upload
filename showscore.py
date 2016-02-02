@@ -8,14 +8,6 @@ from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSon
 
 Score = Blueprint('Score',__name__)
 
-@Score.route('/')
-def showTeams():
-    return 'nothing'
-
-@Score.route('/team/')
-def showOwn():
-    return 'nothing'
-
 @Score.route('/team/<team>')
 def showOwnScore(team):
     songList=getSong()
@@ -58,4 +50,6 @@ def showPlayerScore(playerid):
     Scores=getNonSpecScore(playerid,0,10000)
     return render_template('score_personal.html',TEAMS=TEAMS,playerInfo=playerInfo,Scores=Scores)
 
-
+@Score.route('/song')
+def showSongRank():
+    return render_template('score_song.html',TEAMS=TEAMS)

@@ -12,13 +12,13 @@
 
 <table class="table table-hover">
 	<thead>
-		<tr><th></th><th>隊伍</th><th>卡名</th><th>Facebook</th>
+		<tr><th></th><!--th>隊伍</th--><th>卡名</th><th>Facebook</th>
 	</thead>
 	<tbody>
 	{% for player in Players %}
 	<tr>
 		<td style="text-align: center"><a href="./{{player['PlayerID']}}"><span class="glyphicon glyphicon-align-justify"></a></span></td>
-		<td><a href="/score/team/{{player['TeamID']}}">{{ player['TeamName'] }}</a></td>
+		<!--td><a href="/score/team/{{player['TeamID']}}">{{ player['TeamName'] }}</a></td-->
 		<td><a href="./{{player['PlayerID']}}">{{ player['CardName'] }}</a></td>
 		<td><a href="https://www.facebook.com/{{player['FBID']}}">{{ player['FBName'] }}</a></td>
 	</tr>

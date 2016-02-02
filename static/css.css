@@ -1,4 +1,7 @@
 .cutOverFlow {
 	 overflow:hidden;
-	 text-overflow:ellipsis
+	 text-overflow:ellipsis;
+}
+.Intro{
+	font-size: 18px;
 }

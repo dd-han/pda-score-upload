@@ -127,10 +127,10 @@ def upload():
                     return resp
 
                 else:
-                    return render_template('upload_msg.html',message="您似乎不是管理員，如果有什麼誤會請回報你的FacenookID："+AdminUID)
+                    return render_template('upload_msg.html',TEAMS=TEAMS,message="您似乎不是管理員，如果有什麼誤會請回報你的FacenookID："+AdminUID)
                 
             else:
-                return render_template('upload_msg.html',message="登入失敗，請重試，錯誤訊息："+Res[1])
+                return render_template('upload_msg.html',TEAMS=TEAMS,message="登入失敗，請重試，錯誤訊息："+Res[1])
             
         else:
             if request.cookies.get('fbToken'):
@@ -143,14 +143,14 @@ def upload():
                     return render_template('upload_by_admin.html',TEAMS=TEAMS,AdminName=AdminName,songs=songinfo,players=playerinfo)
                 else:
                     if not facebook.getUID(fbToken):
-                        return render_template('upload_msg.html',\
+                        return render_template('upload_msg.html',TEAMS=TEAMS, \
                                 message='Token過期，請重新登入：'+"<a href=\""+facebook.genGetCodeURL(request.base_url)+"\">使用facebook登入</a>")
                     else:
-                        return render_template('upload_msg.html',message='Token有效，但是您不是管理員！！\
+                        return render_template('upload_msg.html',TEAMS=TEAMS,message='Token有效，但是您不是管理員！！\
 			您的FBID：'+facebook.getUID(fbToken))
 
             else:
                 LoginURL=facebook.genGetCodeURL(request.base_url)
-                msg='您尚未登入，<a href=\"'+LoginURL+'\">使用facebook登入</a>'
-                return render_template('upload_msg.html',message=msg)
+                msg='上傳界面僅供管理員使用，如果您是管理員請<a href=\"'+LoginURL+'\">使用facebook登入</a>。<br />如果您不是管理員，請離開本頁面。'
+                return render_template('upload_msg.html',TEAMS=TEAMS,message=msg)
 
