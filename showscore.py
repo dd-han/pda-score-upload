@@ -4,7 +4,7 @@ from flask import Blueprint,render_template,request,redirect,make_response
 #from werkzeug import secure_filename
 
 from config import TEAMS
-from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSong, getScore, getOnePlayer, getPlayer
+from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSong, getScore, getOnePlayer, getPlayer, getNonSpecScore
 
 Score = Blueprint('Score',__name__)
 

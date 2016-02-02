@@ -10,7 +10,7 @@
 {% for Score in Scores %}
 
 <div class="col-sm-4 thumbnail">
-	<div class="col-sm-6" style="padding:0">{{Score['SongName']}}</div>
+	<div class="col-sm-6 text-nowrap cutOverFlow" style="padding:0">{{Score['SongName']}}</div>
 	<div class="col-sm-6">達成率：{{Score['Rate']}}</div>
 	<img src="/static/images/{{Score['ImageHash']}}{{Score['ImageExt']}}" style="max-width: 100%;">
 </div>
