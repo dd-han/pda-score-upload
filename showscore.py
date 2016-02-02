@@ -8,6 +8,22 @@ from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSon
 
 Score = Blueprint('Score',__name__)
 
+def getUniqPlayerScore(score,count):
+    uniqSongScore=[]
+    playerList=[]
+    count = 0
+    for record in score :
+        try:
+            playerList.index(record['FBID'])
+        except:
+            playerList.append(record['FBID'])
+            uniqSongScore.append(record)
+            count+=1
+        if count > count:
+            break
+
+    return uniqSongScore
+
 @Score.route('/team/<team>')
 def showOwnScore(team):
     songList=getSong()
@@ -18,7 +34,9 @@ def showOwnScore(team):
 
     scoreList=[]
     for song in songList:
-        scoreList.append(getTeamSongTop(team,song['SongID'],3))
+        songScore=getTeamSongTop(team,song['SongID'],10000)
+        uniqSongScore = getUniqPlayerScore(score=songScore,count=3)
+        scoreList.append( uniqSongScore )
     return render_template('score.html',TEAMS=TEAMS,songList=songList,scoreList=scoreList,teamInfo=teamInfo)
 
 @Score.route('/team/<teamID>/song/<songid>')
