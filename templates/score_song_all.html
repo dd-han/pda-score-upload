@@ -1,0 +1,27 @@
+{% extends "base.html" %}  
+
+{% block title %}第二屆DIVA台灣社線上大賽 - 歌曲歌曲排名{% endblock %}
+
+{% block menuSongRankClass %}active{% endblock%}
+
+{% block content %}
+
+<h2>歌曲成績清單</h2>
+<p><strong>提醒：本頁面根據上傳時間排序</strong></p>
+
+{% for song in songList%}
+<div class="col-sm-12 thumbnail">
+	<a name="{{song['SongID']}}"></a>
+	<div class="col-sm-12 text-nowrap cutOverFlow"><h1>{{song['SongName']}}</h1></div>
+	<div class="col-sm-12">難度：{{song['SongLevel']}} ({{song['SongStars']}}★)</div>
+	{% for score in scoreList[song['SongID']-1] %}
+	<div class="col-sm-6">
+		<div class="col-sm-6"><a href="/score/personal/{{score['PlayerID']}}">{{score['CardName']}}</a></div>
+		<div class="col-sm-6">Rate: {{score['Rate']}}</div>
+		<img src="/static/images/{{score['ImageHash']}}{{score['ImageExt']}}" style="max-width: 100%;">
+	</div>
+	{% endfor %}
+</div>
+{% endfor %}
+
+{% endblock %}
