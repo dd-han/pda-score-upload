@@ -7,15 +7,18 @@
 {% block content %}
 
 <h2>歌曲排名</h2>
+<p><strong>提醒：本排名僅供參考</strong></p>
+<p>本排名僅針對「達成率」進行排序，正式的排名除了「達成率」外，還依序要看「FINE數量」、「樂曲分數」等成績，才能決定最終的排名，詳細計分方式請至<a href="https://www.facebook.com/groups/216199652045366/permalink/240703492928315/" target="_blank">Facebook社團確認</a>。
 
 {% for song in songList%}
 <div class="col-sm-12 thumbnail">
-	<div class="col-sm-12 text-nowrap cutOverFlow"><h1>{{song['SongName']}}</h1></div>
+	<a name="{{song['SongID']}}"></a>
+	<div class="col-sm-12 text-nowrap cutOverFlow"><h1><a href="/score/song/{{song['SongID']}}">{{song['SongName']}}</a></h1></div>
 	<div class="col-sm-12">難度：{{song['SongLevel']}} ({{song['SongStars']}}★)</div>
 	{% for score in scoreList[song['SongID']-1] %}
 	<div class="col-sm-6">
 		<div class="col-sm-12"><h2>第{{score['Count']}}名</h2></div>
-		<div class="col-sm-6">{{score['CardName']}}</div>
+		<div class="col-sm-6"><a href="/score/personal/{{score['PlayerID']}}">{{score['CardName']}}</a></div>
 		<div class="col-sm-6">Rate: {{score['Rate']}}</div>
 		<img src="/static/images/{{score['ImageHash']}}{{score['ImageExt']}}" style="max-width: 100%;">
 	</div>

@@ -4,7 +4,7 @@ from flask import Blueprint,render_template,request,redirect,make_response
 #from werkzeug import secure_filename
 
 from config import TEAMS
-from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSong, getScore, getOnePlayer, getPlayer, getNonSpecScore, getSongTop
+from database import getOwnSong, getSpecSong, getTeamSongTop, getSong, getOneSong, getScore, getOnePlayer, getPlayer, getNonSpecScore, getSongTop, getSongScores
 
 Score = Blueprint('Score',__name__)
 
@@ -80,3 +80,15 @@ def showSongRank():
         scoreList.append( uniqSongScore )
     #return render_template('score.html',TEAMS=TEAMS,songList=songList,scoreList=scoreList,teamInfo=teamInfo)
     return render_template('score_song.html',TEAMS=TEAMS,songList=songList,scoreList=scoreList)
+
+@Score.route('/song/<songID>')
+def showSongAllScore(songID):
+    songList=[]
+    songList.append(getOneSong(songID))
+
+    scoreList=[]
+    for song in songList:
+        songScore=getSongScores(song['SongID'],10000)
+        scoreList.append( songScore )
+    #return render_template('score.html',TEAMS=TEAMS,songList=songList,scoreList=scoreList,teamInfo=teamInfo)
+    return render_template('score_song_all.html',TEAMS=TEAMS,songList=songList,scoreList=scoreList)

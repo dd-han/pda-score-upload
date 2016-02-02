@@ -130,6 +130,23 @@ def getSongTop(SongID,Limit):
         connection.close()
         return result
 
+def getSongScores(SongID,Limit):
+    result=False
+    try:
+        connection=makeConn()
+        with connection.cursor() as cursor:
+            ## This line not Working!!!!
+            ##GROUP BY `Score`.`PlayerID`\
+            sql = 'SELECT `Player`.`CardName`, `Player`.`FBID`, `Player`.`PlayerID`, `Score`.`Rate`, `Score`.`ImageHash`, `Score`.`ImageExt`\
+            FROM `Score` INNER JOIN `Player` ON `Score`.`PlayerID`=`Player`.`PlayerID`\
+            WHERE `Score`.`SongID` = %s\
+            ORDER BY `Score`.`ScoreDate` DESC LIMIT %s'
+            cursor.execute(sql, (SongID,Limit) )
+            result = cursor.fetchall()
+    finally:
+        connection.close()
+        return result
+
 def getScore(Player,Start,Amount):
     result=False
     try:
